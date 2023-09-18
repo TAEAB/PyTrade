@@ -3,12 +3,12 @@ This initializes the assets.json file.
 '''
 import json
 
-def initializeFunds(funds_usd):
+def initializeFunds(funds_usd:float):
     '''
     Set all assets to initial values
 
     Arguments:
-        funds_usd (float): The initial funds in dollars
+        funds_usd: The initial funds in dollars
     
     Return:
         (boolean): success or failure
@@ -16,12 +16,11 @@ def initializeFunds(funds_usd):
     hardSet('funds_usd', 0)
     updateAssets('funds_usd', funds_usd)
 
-def updateAssets(key, amt):
+def updateAssets(key:str, amt:float):
     '''
     Arguments:
         key (string): label of the asset
         amt (float): the change in amount of the asset
-        val (float): the changes in value of the asset
         
     Return:
         (boolean): success or failure
@@ -50,7 +49,7 @@ def trashCollector():
         json.dump(assets, assets_json)
     return True
 
-def checkPresence(key):
+def checkPresence(key:str):
     """
     Check whether the key is in the JSON file.
     """
@@ -58,7 +57,7 @@ def checkPresence(key):
         assets = json.load(assets_json)
     return key in assets
 
-def getAmt(key):
+def getAmt(key:str):
     """
     Access amount of an asset in the JSON.
     """
@@ -68,13 +67,13 @@ def getAmt(key):
         raise Exception("Target asset not in possesions")
     return assets[key]
 
-def hardSet(key, amt):
+def hardSet(key:str, amt:float):
     '''
     Set the value of an asset in the JSON.
     
     Arguments:
-        key (string): label of the asset
-        amt (float): new amount of asset
+        key: label of the asset
+        amt: new amount of asset
     
     Return:
         (boolean): success or failure
