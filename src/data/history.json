@@ -1,1 +1,1 @@
-{"_desc": "This will log the actions by this program", "log": []}
+{"_desc": "This will log the actions by this program", "log": [{"timestamp": "2023-06-04 16:35:50.761070", "orders": [{"name": "AAPL", "change": 0}, {"name": "AAPL", "change": 0}, {"name": "GOOGL", "change": 0}]}]}
