@@ -1,1 +1,1 @@
-{"_desc": "This file keeps a list of the stock tickers of interest in 'list'.", "list": ["AAPL", "AAPL", "GOOGL"]}
+{"_desc": "This file keeps a list of the stock tickers of interest in 'list'.", "list": [{"ticker": "AAPL", "long_is_above_short": false}, {"ticker": "GOOGL", "long_is_above_short": false}, {"ticker": "TSLA", "long_is_above_short": false}]}
