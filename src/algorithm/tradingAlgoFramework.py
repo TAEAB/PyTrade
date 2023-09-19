@@ -95,14 +95,20 @@ def decide_buy(stock_data):
     Decide whether to buy a stock
 
     Argument: 
-        stock_data (pandas df)
-
+        stock_data (pandas df): Stock data for past 100 days
     Return:
         choice (boolean)
     """
-    long = stock_data['close'].copy().ewm(span=100).mean()
-    short = stock_data['close'].copy().ewm(span=50).mean()
-    return short[0] > long[0] and abs(short - long) < 1
+    # Calculate moving average
+    long = stock_data['close'].copy().rolling(100).mean()
+    short = stock_data['close'].copy().rolling(50).mean()
+    # Get moving average
+    long_average = long[long.notnull()].iloc[0]
+    short_average = short[short.notnull()].iloc[0]
+    # Trending upwards if the short > long 
+    # Return true if trending upwards and this instance is a change in the trend
+    # It is a change in the trend if previously, the long MA was greater than the short MA
+    return short_average > long_average and abs(short - long) < 1
 
 def decide_sell(stock_data):
     """
