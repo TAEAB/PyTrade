@@ -42,4 +42,4 @@ def checkTickers(ticker:str):
     """
     with open("../py_trading/src/data/targetStock.json", 'r') as f:
         assets = json.load(f)
-    return ticker in assets['list']
+    return ticker in [x["ticker"] for x in assets['list']]
