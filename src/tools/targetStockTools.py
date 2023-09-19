@@ -10,6 +10,10 @@ def addTicker(ticker:str):
     """
     with open("../py_trading/src/data/targetStock.json", 'r') as f:
         assets = json.load(f)
+    new_target = {
+                    "ticker": ticker,
+                    "long_is_above_short": False # False by default--requires initialization
+                }
     assets['list'].append(ticker)
     with open("../py_trading/src/data/targetStock.json", 'w') as f:
         json.dump(assets, f)
