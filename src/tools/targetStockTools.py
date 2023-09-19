@@ -14,7 +14,7 @@ def addTicker(ticker:str):
                     "ticker": ticker,
                     "long_is_above_short": False # False by default--requires initialization
                 }
-    assets['list'].append(ticker)
+    assets['list'].append(new_target)
     with open("../py_trading/src/data/targetStock.json", 'w') as f:
         json.dump(assets, f)
 
@@ -24,7 +24,7 @@ def listTickers():
     """
     with open("../py_trading/src/data/targetStock.json", 'r') as f:
         assets = json.load(f)
-    return assets['list']
+    return [x["ticker"] for x in assets['list']]
 
 def resetTickers():
     """
