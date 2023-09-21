@@ -2,7 +2,7 @@ from .tradingAlgoFramework import *
 from datetime import datetime
 from tools import targetStockTools
 
-def workflow_instance(stock_ticker: str) -> None:
+def workflow_instance(stock_ticker: str) -> int:
     '''
     This executes the decision-making to buy/sell a stock at the time it is called.
 
@@ -23,6 +23,7 @@ def workflow_instance(stock_ticker: str) -> None:
     elif decide_sell(stock_data):
         exec_sell(stock_ticker, 1, stock_price)
         return stock_price
+    return 0
 
 def loopOverStocks() -> None:
     '''
