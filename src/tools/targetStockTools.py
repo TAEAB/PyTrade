@@ -4,7 +4,7 @@ Scripts to edit targetStock.json
 
 import json
 
-def addTicker(ticker:str):
+def addTicker(ticker:str) -> None:
     """
     Adds a stock to the list of tracked assets
     """
@@ -18,7 +18,7 @@ def addTicker(ticker:str):
     with open("../py_trading/src/data/targetStock.json", 'w') as f:
         json.dump(assets, f)
 
-def listTickers():
+def listTickers() -> list:
     """
     Returns a list of the tracked tickers
     """
@@ -26,7 +26,7 @@ def listTickers():
         assets = json.load(f)
     return [x["ticker"] for x in assets['list']]
 
-def resetTickers():
+def resetTickers() -> None:
     """
     Clears list of tickers
     """
@@ -36,7 +36,7 @@ def resetTickers():
     with open("../py_trading/src/data/targetStock.json", 'w') as f:
         json.dump(assets, f)
 
-def checkTickers(ticker:str):
+def checkTickers(ticker:str) -> bool:
     """
     Checks whether ticker is tracked in list
     """
