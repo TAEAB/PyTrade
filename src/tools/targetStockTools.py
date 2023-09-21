@@ -49,7 +49,7 @@ def checkTickers(ticker:str) -> bool:
 # Unique to moving-average approach / not necessary for other trading heuristics
 def getRelativeAveragePosition(ticker: str) -> bool:
     """
-    Returns true if 100 day average is greater than 50 day average. False otherwise
+    Returns true if 100 day average is greater than 50 day average. False otherwise.
     """
     with open("../py_trading/src/data/targetStock.json", 'r') as f:
         assets = json.load(f)
