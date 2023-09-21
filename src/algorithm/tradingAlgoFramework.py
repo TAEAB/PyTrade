@@ -5,7 +5,7 @@ This is the basic structure for the trading algorithm. This creates the environm
 The API is contained in the function that fetches data. Everything else occus on the machine.
 """
 from twelvedata import TDClient
-from tools import updateAssets
+from tools import assetTools
 import json
 import pandas as pd
 
@@ -54,13 +54,13 @@ def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> b
         (boolean)
     """
     value = shares * float(price_per_share)
-    funds_usd = updateAssets.getAmt('funds_usd')
+    funds_usd = assetTools.getAmt('funds_usd')
     if value < funds_usd:
         raise Exception(f"Purchase (${value}) exceeds available funds (${funds_usd}).")
     # Spend money
-    updateAssets('funds_usd', -shares*price_per_share)
+    assetTools('funds_usd', -shares*price_per_share)
     # Update possessions
-    updateAssets(stock_ticker, shares)
+    assetTools(stock_ticker, shares)
     return True
 
 def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
@@ -75,18 +75,18 @@ def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     Return:
         (boolean): success or failure
     """
-    if not updateAssets.checkPresence(stock_ticker):
+    if not assetTools.checkPresence(stock_ticker):
         raise Exception(f"Attempted to sell nonexistent asset: {stock_ticker}.")
     else: 
         # Ensure transaction is valid
-        amt = updateAssets(stock_ticker)
+        amt = assetTools(stock_ticker)
         if shares > amt:
             raise Exception(f"Attempted to sell more shares than owned: {shares} > {amt}")
         # Excecute transaction
-        updateAssets(stock_ticker, -shares)
-        updateAssets('funds_usd', shares*price_per_share)
+        assetTools(stock_ticker, -shares)
+        assetTools('funds_usd', shares*price_per_share)
         # Clean list
-        updateAssets.trashCollector()
+        assetTools.trashCollector()
     return True 
 
 
