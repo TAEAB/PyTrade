@@ -103,8 +103,8 @@ def decide_buy(stock_data):
     long = stock_data['close'].copy().rolling(100).mean()
     short = stock_data['close'].copy().rolling(50).mean()
     # Get moving average
-    long_average = long[long.notnull()].iloc[0]
-    short_average = short[short.notnull()].iloc[0]
+    long_average = long[long.notnull()].iloc[-1]
+    short_average = short[short.notnull()].iloc[-1]
     # Trending upwards if the short > long 
     # Return true if trending upwards and this instance is a change in the trend
     # It is a change in the trend if previously, the long MA was greater than the short MA
