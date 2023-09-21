@@ -7,6 +7,7 @@ The API is contained in the function that fetches data. Everything else occus on
 from twelvedata import TDClient
 from tools import updateAssets
 import json
+import pandas as pd
 
 # Initialize the API
 import os 
@@ -17,7 +18,7 @@ APIToken = json.load(f)
 td = TDClient(apikey=APIToken["token"])
 
 # Bridge to the stock market.
-def fetch_stock_data(stock_ticker, interval, size):
+def fetch_stock_data(stock_ticker: str, interval: str, size: int) -> pd.DataFrame:
     """
     Gets the necessary data from the API as a PANDAS dataframe.
 
@@ -26,7 +27,7 @@ def fetch_stock_data(stock_ticker, interval, size):
         interval (string): time frame (1min, 5min, 15min, 30min, 45min, 1h, 2h, 4h, 8h, 1day, 1week, 1month)
         size (int): the number of data points to retrieve
 
-    Return (dict):
+    Return (pd.DataFrame):
         price per share at time of call
     """
     # Construct the time series
@@ -40,7 +41,7 @@ def fetch_stock_data(stock_ticker, interval, size):
 
 
 # Keep count of assets
-def exec_purchase(stock_ticker, shares, price_per_share):
+def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     """
     Execute a purchase through the API.
 
@@ -62,7 +63,7 @@ def exec_purchase(stock_ticker, shares, price_per_share):
     updateAssets(stock_ticker, shares)
     return True
 
-def exec_sell(stock_ticker, shares, price_per_share):
+def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     """
     Sell shares through the API.
 
@@ -90,7 +91,7 @@ def exec_sell(stock_ticker, shares, price_per_share):
 
 
 # Buy/Sell if stock is increasing / decreasing in value 
-def decide_buy(stock_data):
+def decide_buy(stock_data: pd.DataFrame) -> bool:
     """
     Decide whether to buy a stock
 
@@ -110,7 +111,7 @@ def decide_buy(stock_data):
     # It is a change in the trend if previously, the long MA was greater than the short MA
     return short_average > long_average and abs(short - long) < 1
 
-def decide_sell(stock_data):
+def decide_sell(stock_data: pd.DataFrame) -> bool:
     """
     Decide whether to sell a stock
 
