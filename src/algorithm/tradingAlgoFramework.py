@@ -5,7 +5,8 @@ This is the basic structure for the trading algorithm. This creates the environm
 The API is contained in the function that fetches data. Everything else occus on the machine.
 """
 from twelvedata import TDClient
-from tools import assetTools
+from tools import assetTools as at
+from tools import targetStockTools as tst
 import json
 import pandas as pd
 
@@ -54,13 +55,13 @@ def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> b
         (boolean)
     """
     value = shares * float(price_per_share)
-    funds_usd = assetTools.getAmt('funds_usd')
+    funds_usd = at.getAmt('funds_usd')
     if value < funds_usd:
         raise Exception(f"Purchase (${value}) exceeds available funds (${funds_usd}).")
     # Spend money
-    assetTools('funds_usd', -shares*price_per_share)
+    at('funds_usd', -shares*price_per_share)
     # Update possessions
-    assetTools(stock_ticker, shares)
+    at(stock_ticker, shares)
     return True
 
 def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
@@ -75,18 +76,18 @@ def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     Return:
         (boolean): success or failure
     """
-    if not assetTools.checkPresence(stock_ticker):
+    if not at.checkPresence(stock_ticker):
         raise Exception(f"Attempted to sell nonexistent asset: {stock_ticker}.")
     else: 
         # Ensure transaction is valid
-        amt = assetTools(stock_ticker)
+        amt = at(stock_ticker)
         if shares > amt:
             raise Exception(f"Attempted to sell more shares than owned: {shares} > {amt}")
         # Excecute transaction
-        assetTools(stock_ticker, -shares)
-        assetTools('funds_usd', shares*price_per_share)
+        at(stock_ticker, -shares)
+        at('funds_usd', shares*price_per_share)
         # Clean list
-        assetTools.trashCollector()
+        at.trashCollector()
     return True 
 
 
@@ -109,7 +110,7 @@ def decide_buy(stock_data: pd.DataFrame) -> bool:
     # Trending upwards if the short > long 
     # Return true if trending upwards and this instance is a change in the trend
     # It is a change in the trend if previously, the long MA was greater than the short MA
-    return short_average > long_average and abs(short - long) < 1
+    return short_average > long_average and stock
 
 def decide_sell(stock_data: pd.DataFrame) -> bool:
     """
