@@ -20,7 +20,7 @@ def workflow_instance(stock_ticker: str) -> float:
         exec_purchase(stock_ticker, 1, stock_price)
         return -stock_price
     # Sell? --> Sell
-    elif decide_sell(stock_data):
+    elif decide_sell(stock_ticker, stock_data):
         exec_sell(stock_ticker, 1, stock_price)
         return stock_price
     return 0
