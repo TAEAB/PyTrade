@@ -2,7 +2,7 @@ from .tradingAlgoFramework import *
 from datetime import datetime
 from tools import targetStockTools
 
-def workflow_instance(stock_ticker: str) -> int:
+def workflow_instance(stock_ticker: str) -> float:
     '''
     This executes the decision-making to buy/sell a stock at the time it is called.
 
@@ -10,7 +10,7 @@ def workflow_instance(stock_ticker: str) -> int:
         stock_ticker (string)
         
     Return:
-        1, 0, -1 (int) : bought, nothing, sold
+        change (float): change in funds
     '''
     # Get Data
     stock_data = fetch_stock_data(stock_ticker,'1h', 100)
