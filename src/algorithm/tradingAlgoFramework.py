@@ -111,17 +111,25 @@ def decide_buy(ticker: str, stock_data: pd.DataFrame) -> bool:
     # It is a change in the trend if previously, the long MA was greater than the short MA
     return short_average > long_average and tst.getRelativeAveragePosition(ticker)
 
-def decide_sell(stock_data: pd.DataFrame) -> bool:
+def decide_sell(ticker: str, stock_data: pd.DataFrame) -> bool:
     """
     Decide whether to sell a stock
 
     Argument: 
-        stock_data (pandas df)
+        ticker: The stock's ticker
+        stock_data
 
     Return:
-        choice (boolean)
+        choice
     """
-    long = stock_data['close'].copy().ewm(span=100).mean()
-    short = stock_data['close'].copy().ewm(span=50).mean()
-    return short[0] < long[0] and abs(short - long) < 1
+    # Calculate moving average
+    long = stock_data['close'].copy().rolling(100).mean()
+    short = stock_data['close'].copy().rolling(50).mean()
+    # Get moving average
+    long_average = long[long.notnull()].iloc[-1]
+    short_average = short[short.notnull()].iloc[-1]
+    # Trending upwards if the short > long 
+    # Return true if trending upwards and this instance is a change in the trend
+    # It is a change in the trend if previously, the long MA was greater than the short MA
+    return short_average < long_average and (not tst.getRelativeAveragePosition(ticker))
 
