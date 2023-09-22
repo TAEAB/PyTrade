@@ -25,14 +25,14 @@ def updateAssets(key:str, amt:float):
     Return:
         (boolean): success or failure
     '''
-    with open("../data/assets.json", 'r') as assets_json:
+    with open("../py_trading/src/data/assets.json", 'r') as assets_json:
         assets = json.load(assets_json)
     # either initialize the json entry or add to its value
     if key in assets:
         assets[key] += amt
     if key not in assets:
         assets[key] = amt
-    with open('../data/assets.json', 'w') as assets_json:
+    with open('../py_trading/src/data/assets.json', 'w') as assets_json:
         json.dump(assets, assets_json)
     return True
 
@@ -40,12 +40,12 @@ def trashCollector():
     """
     Remove any entries in the stock portion of the JSON with a zero value.
     """
-    with open("../data/assets.json", 'r') as assets_json:
+    with open("../py_trading/src/data/assets.json", 'r') as assets_json:
         assets = json.load(assets_json)
     zero_keys = {key for key in assets if assets[key][0] == 0}
     for key in zero_keys:
         del assets[key]
-    with open('../data/assets.json', 'w') as assets_json:
+    with open('../py_trading/src/data/assets.json', 'w') as assets_json:
         json.dump(assets, assets_json)
     return True
 
@@ -53,7 +53,7 @@ def checkPresence(key:str):
     """
     Check whether the key is in the JSON file.
     """
-    with open("../data/assets.json", 'r') as assets_json:
+    with open("../py_trading/src/data/assets.json", 'r') as assets_json:
         assets = json.load(assets_json)
     return key in assets
 
@@ -61,7 +61,7 @@ def getAmt(key:str):
     """
     Access amount of an asset in the JSON.
     """
-    with open("../data/assets.json", 'r') as assets_json:
+    with open("../py_trading/src/data/assets.json", 'r') as assets_json:
         assets = json.load(assets_json)
     if key not in assets:
         raise Exception("Target asset not in possesions")
@@ -78,12 +78,12 @@ def hardSet(key:str, amt:float):
     Return:
         (boolean): success or failure
     '''
-    with open("../data/assets.json", 'r') as assets_json:
+    with open("../py_trading/src/data/assets.json", 'r') as assets_json:
         assets = json.load(assets_json)
     assets[key] = amt
-    with open('../data/assets.json', 'w') as assets_json:
+    with open("../py_trading/src/data/assets.json", 'w') as assets_json:
         json.dump(assets, assets_json)
         
 if __name__ == "__main__":
     initializeFunds(10)
-    updateAssets("aaple", 23)
+    updateAssets("aapl", 23)
