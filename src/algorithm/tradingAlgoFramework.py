@@ -24,11 +24,11 @@ def fetch_stock_data(stock_ticker: str, interval: str, size: int) -> pd.DataFram
     Gets the necessary data from the API as a PANDAS dataframe.
 
     Argument:
-        stock_ticker (string): ticker 
-        interval (string): time frame (1min, 5min, 15min, 30min, 45min, 1h, 2h, 4h, 8h, 1day, 1week, 1month)
-        size (int): the number of data points to retrieve
+        stock_ticker: ticker 
+        interval: time frame (1min, 5min, 15min, 30min, 45min, 1h, 2h, 4h, 8h, 1day, 1week, 1month)
+        size: the number of data points to retrieve
 
-    Return (pd.DataFrame):
+    Return:
         price per share at time of call
     """
     # Construct the time series
@@ -47,12 +47,12 @@ def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> b
     Execute a purchase through the API.
 
     Argument:
-        stock_ticker (string)
-        shares (float): The amount of shares to buy 
-        price_per_share (float): The value of each share
+        stock_ticker
+        shares: The amount of shares to buy 
+        price_per_share: The value of each share
         
     Return:
-        (boolean)
+        success (True) or failure (False)
     """
     value = shares * float(price_per_share)
     funds_usd = at.getAmt('funds_usd')
@@ -74,7 +74,7 @@ def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
         price_per_share (float): The price of each share 
 
     Return:
-        (boolean): success or failure
+        success (True) or failure (False)
     """
     if not at.checkPresence(stock_ticker):
         raise Exception(f"Attempted to sell nonexistent asset: {stock_ticker}.")
