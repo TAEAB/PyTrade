@@ -7,10 +7,10 @@ def workflow_instance(stock_ticker: str) -> float:
     This executes the decision-making to buy/sell a stock at the time it is called.
 
     Arguments:
-        stock_ticker (string)
+        stock_ticker
         
     Return:
-        change (float): change in funds
+        change: change in funds
     '''
     # Get Data
     stock_data = fetch_stock_data(stock_ticker,'1h', 100)
