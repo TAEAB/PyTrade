@@ -1,5 +1,5 @@
 """
-Scripts to edit twelveDataAPI.json
+Functions to edit twelveDataAPI.json
 """
 import json
 
