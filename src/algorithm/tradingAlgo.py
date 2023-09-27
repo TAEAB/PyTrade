@@ -1,6 +1,7 @@
 from .tradingAlgoFramework import *
 from datetime import datetime
-from tools import targetStockTools
+import tools.targetStockTools as tst
+import tools. historyTools as ht
 
 def workflow_instance(stock_ticker: str) -> float:
     '''
@@ -27,18 +28,14 @@ def workflow_instance(stock_ticker: str) -> float:
 
 def loopOverStocks() -> None:
     '''
-    Distributes workflow_instance over all the stocks you're tracking & keeps records
+    Distributes workflow_instance over all tracked stocks
     '''
-    event_log = {"timestamp": str(datetime.now()), "orders": []}
-    tickers = targetStockTools.listTickers()
+    tickers = tst.listTickers()
+    events = []
     for stock_ticker in tickers:
-        tmp_log = {"name": stock_ticker}
-        tmp_log["change"] = workflow_instance(stock_ticker)
-        event_log["orders"].append(tmp_log)
-    with open("../py_trading/src/data/history.json", "r") as f:
-        tmp = json.load(f)
-    tmp["log"].append(event_log)
-    print(tmp)
-    with open("../py_trading/src/data/history.json", "w") as f:
-        json.dump(tmp, f)
+        events.append(
+            ht.logEvent(stock_ticker, 
+                        workflow_instance(stock_ticker))
+        )
+    ht.logEvents(events)
         
