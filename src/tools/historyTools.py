@@ -37,3 +37,15 @@ def getHistory() -> pd.DataFrame:
         tmp = json.load(f)
     hist = pd.DataFrame(tmp["log"])
     return hist
+
+def resetHistory() -> None: 
+    """
+    Clears data in history log
+    """
+    with open("../py_trading/src/data/history.json", "r") as f:
+        tmp = json.load(f)
+    tmp["log"] = []
+    with open("../py_trading/src/data/history.json", "w") as f:
+        json.dump(tmp, f)
+
+## TODO: Develop accessor for specific assets / debug
