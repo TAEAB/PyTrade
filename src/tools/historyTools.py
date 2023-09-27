@@ -31,7 +31,7 @@ def logEvent(ticker: str, change_in_held_value: float) -> dict:
 
 def getHistory() -> pd.DataFrame:
     """
-    Returns the history as a pandas dataframe
+    Returns the entire history as a pandas dataframe
     """
     with open("../py_trading/src/data/history.json", "r") as f:
         tmp = json.load(f)
