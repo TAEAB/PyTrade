@@ -10,6 +10,8 @@ def logEvents(events: list) -> None:
     """
     Makes a single entry for all events from given time in the history JSON
     """
+    if type(events) != str:
+        raise TypeError(f"parameter 'events' expects list, got {type(events)}")
     events_log = {"timestamp": str(datetime.now()), }
     for event in events:
         ticker = event["asset"]
@@ -28,6 +30,11 @@ def logEvent(ticker: str, delta_value_held: float) -> dict:
     Return: 
         event_log: dict summarizing change in asset
     """
+    if type(ticker) != str:
+        raise TypeError(f"parameter 'ticker' expects string, got {type(ticker)}")
+    if type(delta_value_held) != float:
+        raise TypeError(f"parameter 'delta_value_held' expects float, got {type(delta_value_held)}")
+    
     event_log = {"asset": ticker, "delta_value_held": delta_value_held}
     return event_log
 
@@ -55,8 +62,3 @@ def resetHistory() -> None:
     tmp["log"] = []
     with open("../py_trading/src/data/history.json", "w") as f:
         json.dump(tmp, f)
-
-if __name__ == "__main__":
-
-    hist = getHistory("2")
-    print(hist)
