@@ -4,7 +4,7 @@ Functions to edit history.json
 import json
 import pandas as pd
 from datetime import datetime
-
+import time
 
 def logEvents(events: list) -> None:
     """
@@ -12,7 +12,7 @@ def logEvents(events: list) -> None:
     """
     events_log = {"timestamp": str(datetime.now()), }
     for event in events:
-        ticker = event["ticker"]
+        ticker = event["asset"]
         delta_value_held = event["delta_value_held"]
         events_log[ticker] = delta_value_held
     with open("../py_trading/src/data/history.json", "r") as f:
@@ -31,14 +31,20 @@ def logEvent(ticker: str, delta_value_held: float) -> dict:
     event_log = {"asset": ticker, "delta_value_held": delta_value_held}
     return event_log
 
-def getHistory() -> pd.DataFrame:
+def getHistory(asset:str = None) -> pd.DataFrame:
     """
-    Returns the entire history as a pandas dataframe
+    Returns the history as a pandas dataframe. Either for a given asset, or for all if none requested.
     """
-    with open("../py_trading/src/data/history.json", "r") as f:
-        tmp = json.load(f)
-    hist = pd.DataFrame(tmp["log"])
-    return hist
+    tmp = pd.read_json("../py_trading/src/data/history.json")
+    hist = pd.DataFrame.from_records(tmp["log"]).set_index('timestamp')
+    if asset == None:
+        return hist
+    if type(asset) == str: 
+        if asset not in hist:
+            raise KeyError(asset)
+        return hist[asset]
+    elif type(asset) != str:
+        raise TypeError("asset: Expected string")
 
 def resetHistory() -> None: 
     """
@@ -50,12 +56,7 @@ def resetHistory() -> None:
     with open("../py_trading/src/data/history.json", "w") as f:
         json.dump(tmp, f)
 
-## TODO: Develop accessor for specific assets / debug
-
 if __name__ == "__main__":
-    hist = getHistory()
+
+    hist = getHistory("2")
     print(hist)
-
-
-
-
