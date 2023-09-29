@@ -4,7 +4,6 @@ Functions to edit history.json
 import json
 import pandas as pd
 from datetime import datetime
-import time
 
 def logEvents(events: list) -> None:
     """
