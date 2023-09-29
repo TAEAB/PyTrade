@@ -10,6 +10,7 @@ Used to set up:
 import tools.targetStockTools as tst
 import tools.assetTools as at
 import tools.credentialTools as ct
+import tools.historyTools as ht
 
 import algorithm.tradingAlgoFramework as taf
 
@@ -31,7 +32,8 @@ if __name__ == "__main__":
     # Initialize Funds
     at.initializeFunds(float(input("Input the initial funds as a float: ")))
     # Reset History
-    # TODO
+    ht.resetHistory()
+    
 
 
 
