@@ -1,5 +1,5 @@
 """
-This script will be called periodically by the OS. It should clean the data.
+This script will be called periodically by the OS.
 """
 
 from algorithm.tradingAlgo import *
