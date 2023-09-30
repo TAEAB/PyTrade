@@ -66,12 +66,11 @@ def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> b
 
 def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     """
-    Sell shares through the API.
-
+    
     Argument:
-        stock_ticker (string)
-        shares (float): The amount of shares to sell 
-        price_per_share (float): The price of each share 
+        stock_ticker
+        shares: The amount of shares to sell 
+        price_per_share: The price of each share 
 
     Return:
         success (True) or failure (False)
@@ -80,7 +79,7 @@ def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
         raise Exception(f"Attempted to sell nonexistent asset: {stock_ticker}.")
     else: 
         # Ensure transaction is valid
-        amt = at(stock_ticker)
+        amt = at.getAmt(stock_ticker)
         if shares > amt:
             raise Exception(f"Attempted to sell more shares than owned: {shares} > {amt}")
         # Excecute transaction
