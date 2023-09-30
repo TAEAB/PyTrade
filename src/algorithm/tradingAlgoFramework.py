@@ -106,10 +106,9 @@ def decide_buy(ticker: str, stock_data: pd.DataFrame) -> bool:
     # Get moving average
     long_average = long[long.notnull()].iloc[-1]
     short_average = short[short.notnull()].iloc[-1]
+    # Return true if trending upwards
     # Trending upwards if the short > long 
-    # Return true if trending upwards and this instance is a change in the trend
-    # It is a change in the trend if previously, the long MA was greater than the short MA
-    return short_average > long_average and tst.getRelativeAveragePosition(ticker)
+    return short_average > long_average
 
 def decide_sell(ticker: str, stock_data: pd.DataFrame) -> bool:
     """
@@ -128,8 +127,6 @@ def decide_sell(ticker: str, stock_data: pd.DataFrame) -> bool:
     # Get moving average
     long_average = long[long.notnull()].iloc[-1]
     short_average = short[short.notnull()].iloc[-1]
-    # Trending upwards if the short > long 
-    # Return true if trending upwards and this instance is a change in the trend
-    # It is a change in the trend if previously, the long MA was greater than the short MA
-    return short_average < long_average and (not tst.getRelativeAveragePosition(ticker))
-
+    # Return true if trending downwards
+    # Trending downwards if the short > long 
+    return short_average < long_average
