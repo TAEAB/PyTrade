@@ -44,7 +44,7 @@ def fetch_stock_data(stock_ticker: str, interval: str, size: int) -> pd.DataFram
 # Keep count of assets
 def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     """
-    Execute a purchase through the API.
+    Execute a purchase.
 
     Argument:
         stock_ticker
@@ -66,6 +66,8 @@ def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> b
 
 def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     """
+
+    Execute a sell. 
     
     Argument:
         stock_ticker
