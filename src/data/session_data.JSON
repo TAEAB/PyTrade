@@ -1,0 +1,14 @@
+{
+    "_desc": "This JSON holds all data relevant to the session.",
+    "session_count": 1, 
+    "sessions": [
+        {
+            "timestamp": "",
+            "API Token": "",
+            "Initial Funds": 0,
+            "strategy trading path": "",
+            "targetStock": [],
+            "history": []
+        }
+    ]
+}
