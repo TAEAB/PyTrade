@@ -5,10 +5,10 @@
         {
             "timestamp": "",
             "API Token": "",
-            "Initial Funds": 0,
+            "initial funds": 0,
             "strategy trading path": "",
-            "targetStock": [],
-            "history": []
+            "target stock": [],
+            "history log": []
         }
     ]
 }
