@@ -13,10 +13,10 @@ import pandas as pd
 # Initialize the API
 import os 
 script_dir = os.path.dirname(__file__)
-rel_path = os.path.join(script_dir, "../data/TwelveDataAPI.json")
+rel_path = os.path.join(script_dir, "../data/session_data.json")
 f = open(rel_path)
-APIToken = json.load(f)
-td = TDClient(apikey=APIToken["token"])
+session_data = json.load(f)
+td = TDClient(apikey=session_data["sessions"][-1]["API token"])
 
 # Bridge to the stock market.
 def fetch_stock_data(stock_ticker: str, interval: str, size: int) -> pd.DataFrame:
