@@ -4,7 +4,7 @@
     "sessions": [
         {
             "timestamp": "",
-            "API Token": "",
+            "API token": "",
             "initial funds": 0,
             "strategy trading path": "",
             "target stock": [],
