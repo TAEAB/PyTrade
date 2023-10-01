@@ -1,5 +1,5 @@
 """
-Scripts to edit targetStock.json
+Scripts to edit target stock list in session_data
 """
 
 import json
