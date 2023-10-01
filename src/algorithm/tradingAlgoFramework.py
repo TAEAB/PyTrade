@@ -93,13 +93,15 @@ def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
 
 
 # Buy/Sell if stock is increasing / decreasing in value 
-def decide_buy(ticker: str, stock_data: pd.DataFrame) -> bool:
+def decide_buy(stock_data: pd.DataFrame) -> bool:
     """
     Decide whether to buy a stock
 
     Argument: 
-        ticker: The stock's ticker
-        stock_data: Price data for past 100 days
+        stock_data : a pandas dataframe of an assets historical prices
+
+    Return:
+        choice (True / False)
     """
     # Calculate moving average
     long = stock_data['close'].copy().rolling(100).mean()
@@ -111,16 +113,15 @@ def decide_buy(ticker: str, stock_data: pd.DataFrame) -> bool:
     # Trending upwards if the short > long 
     return short_average > long_average
 
-def decide_sell(ticker: str, stock_data: pd.DataFrame) -> bool:
+def decide_sell(stock_data: pd.DataFrame) -> bool:
     """
     Decide whether to sell a stock
 
     Argument: 
-        ticker: The stock's ticker
-        stock_data
+        stock_data : a pandas dataframe of an assets historical prices
 
     Return:
-        choice
+        choice (True / False)
     """
     # Calculate moving average
     long = stock_data['close'].copy().rolling(100).mean()
