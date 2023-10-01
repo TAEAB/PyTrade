@@ -107,8 +107,8 @@ def decide_buy(stock_data: pd.DataFrame) -> bool:
     long = stock_data['close'].copy().rolling(100).mean()
     short = stock_data['close'].copy().rolling(50).mean()
     # Get moving average
-    long_average = long[long.notnull()].iloc[-1]
-    short_average = short[short.notnull()].iloc[-1]
+    long_average = long.iloc[-1]
+    short_average = short.iloc[-1]
     # Return true if trending upwards
     # Trending upwards if the short > long 
     return short_average > long_average
@@ -127,8 +127,8 @@ def decide_sell(stock_data: pd.DataFrame) -> bool:
     long = stock_data['close'].copy().rolling(100).mean()
     short = stock_data['close'].copy().rolling(50).mean()
     # Get moving average
-    long_average = long[long.notnull()].iloc[-1]
-    short_average = short[short.notnull()].iloc[-1]
+    long_average = long.iloc[-1]
+    short_average = short.iloc[-1]
     # Return true if trending downwards
     # Trending downwards if the short > long 
     return short_average < long_average
