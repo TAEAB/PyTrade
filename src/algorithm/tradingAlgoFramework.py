@@ -57,7 +57,7 @@ def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> b
     value = shares * float(price_per_share)
     funds_usd = at.getAmt('funds_usd')
     if value < funds_usd:
-        raise Exception(f"Purchase (${value}) exceeds available funds (${funds_usd}).")
+        return False
     # Spend money
     at.updateAssets('funds_usd', -shares*price_per_share)
     # Update possessions
@@ -83,7 +83,7 @@ def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
         # Ensure transaction is valid
         amt = at.getAmt(stock_ticker)
         if shares > amt:
-            raise Exception(f"Attempted to sell more shares than owned: {shares} > {amt}")
+            return False
         # Excecute transaction
         at.updateAssets(stock_ticker, -shares)
         at.updateAssets('funds_usd', shares*price_per_share)
