@@ -11,10 +11,14 @@ import tools.targetStockTools as tst
 import tools.assetTools as at
 import tools.credentialTools as ct
 import tools.historyTools as ht
+import tools.strategyTools as st
 
 import algorithm.tradingAlgoFramework as taf
 
 if __name__ == "__main__":
+    # TODO : Add request for path to trading strategy file
+    # Request Path to trading strategy file
+    st.setPath(str(input("Path to strategy scripts: ")))
     # Prepare API
     ct.setToken(str(input("Copy the API token: ")))
     # Set up tracking list
