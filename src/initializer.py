@@ -20,7 +20,7 @@ if __name__ == "__main__":
     # Request Path to trading strategy file
     st.setPath(str(input("Path to strategy scripts: ")))
     # Prepare API
-    ct.setToken(str(input("Copy the API token: ")))
+    ct.setToken(str(input("API token: ")))
     # Set up tracking list
     tst.resetTickers()
     raw_tracking_list = input("Please list the symbols for the stocks of interest, separated by commas: ")
