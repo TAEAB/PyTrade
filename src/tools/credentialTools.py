@@ -1,5 +1,5 @@
 """
-Functions to edit twelveDataAPI.json
+Functions to edit API portion of session_data.json
 """
 import json
 
