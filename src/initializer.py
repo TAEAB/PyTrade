@@ -6,6 +6,7 @@ Used to set up:
  - API Credentials
 
 """
+import json
 
 import tools.targetStockTools as tst
 import tools.assetTools as at
@@ -28,7 +29,15 @@ if __name__ == "__main__":
     for ticker in tracking_list:
         tst.addTicker(ticker)
     # Initialize Funds
-    at.initializeFunds(float(input("Input the initial funds as a float: ")))
+    init_funds = float(input("Input the initial funds as a float: "))
+    with open("../py_trading/src/data/session_data.json", "r") as f:
+        session_data = json.load(f)
+    with open("../py_trading/src/data/session_data.json", "w") as f:
+        json.dump(at.initializeFunds(init_funds, session_data), f)
+    with open("../py_trading/src/data/assets.json", "r") as g:
+        asset_data = json.load(g)
+    with open("../py_trading/src/data/assets.json", "w") as f:
+        json.dump(at.initializeFunds(init_funds, asset_data), f)
     # Reset History
     ht.resetHistory()
     
