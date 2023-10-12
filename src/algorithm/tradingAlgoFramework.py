@@ -67,7 +67,7 @@ def exec_purchase(stock_ticker: str, shares: float, price_per_share: float) -> b
 def exec_sell(stock_ticker: str, shares: float, price_per_share: float) -> bool:
     """
 
-    Execute a sell. 
+    Execute a sale
     
     Argument:
         stock_ticker
