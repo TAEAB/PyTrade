@@ -3,41 +3,38 @@ This initializes the assets.json file.
 '''
 import json
 
-def initializeFunds(funds_usd:float) -> bool:
+def initializeFunds(funds_usd:float, json: json) -> bool:
     '''
-    Set all assets to initial values
+    Set all assets to initial values,
 
     Arguments:
         funds_usd: The initial funds in dollars
+        json : The json file in which to store the data
     
     Return:
         success (True) or failure (False)
     '''
-    hardSet('funds_usd', 0)
-    updateAssets('funds_usd', funds_usd)
+    hardSet('funds_usd', 0, json)
+    updateAssets('funds_usd', funds_usd, json)
 
-def updateAssets(key:str, amt:float) -> bool:
+def updateAssets(key:str, amt:float, json:json) -> bool:
     '''
     Arguments:
-        key (string): label of the asset
-        amt (float): the change in amount of the asset
-        
+        key: The label of the asset
+        amt: The change in amount of the asset
+        json: The file in which to store the data
+
     Return:
         success (True) or failure (False)
     '''
-    try: 
-        with open("../py_trading/src/data/assets.json", 'r') as assets_json:
-            assets = json.load(assets_json)
-        # either initialize the json entry or add to its value
-        if key in assets:
-            assets[key] += amt
-        if key not in assets:
-            assets[key] = amt
-        with open('../py_trading/src/data/assets.json', 'w') as assets_json:
-            json.dump(assets, assets_json)
-        return True
-    except: 
-        return False
+    assets = json
+    # either initialize the json entry or add to its value
+    if key in assets:
+        assets[key] += amt
+    if key not in assets:
+        assets[key] = amt
+    return assets
+
 
 def trashCollector() -> bool:
     """
