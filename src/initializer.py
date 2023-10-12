@@ -33,7 +33,7 @@ if __name__ == "__main__":
     with open("../py_trading/src/data/session_data.json", "r") as f:
         session_data = json.load(f)
     with open("../py_trading/src/data/session_data.json", "w") as f:
-        json.dump(at.initializeFunds(init_funds, session_data), f)
+        json.dump(at.updateAssets("initial_funds", init_funds, session_data), f)
     with open("../py_trading/src/data/assets.json", "r") as g:
         asset_data = json.load(g)
     with open("../py_trading/src/data/assets.json", "w") as f:
