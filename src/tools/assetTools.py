@@ -3,7 +3,7 @@ This initializes the assets.json file.
 '''
 import json
 
-def initializeFunds(funds_usd:float, json: dict) -> bool:
+def initializeFunds(funds_usd:float, json: dict) -> dict:
     '''
     Set all assets to initial values,
 
@@ -17,7 +17,7 @@ def initializeFunds(funds_usd:float, json: dict) -> bool:
     json = hardSet('funds_usd', 0, json)
     return updateAssets('funds_usd', funds_usd, json)
 
-def updateAssets(key:str, amt:float, json:dict) -> bool:
+def updateAssets(key:str, amt:float, json:dict) -> dict:
     '''
     Arguments:
         key: The label of the asset
@@ -36,7 +36,7 @@ def updateAssets(key:str, amt:float, json:dict) -> bool:
     return assets
 
 
-def hardSet(key:str, amt:float, json: dict) -> bool:
+def hardSet(key:str, amt:float, json: dict) -> dict:
     '''
     Set the value of an asset in the JSON.
     
